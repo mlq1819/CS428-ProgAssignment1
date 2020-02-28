@@ -52,7 +52,7 @@ int main(int argc, char ** argv) {
 		//The client sends a message to the server?
 		start = clock();
 		sendto(sockfd, (const char *)buffer, strlen(buffer), 
-			MSG_CONFIRM, (const struct sockaddr *) &servaddr, len);
+			MSG_CONFIRM, (const struct sockaddr *) &servaddr, sizeof(servaddr));
 			
 		//Receive the server ping along with the address it is coming from
 		n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), 0, ( struct sockaddr *) &servaddr, &len);
