@@ -46,7 +46,7 @@ int main(int argc, char ** argv) {
 	}
 	
 	
-	std::cout << "Sending to Port " << servaddr.sin_port << std::endl;
+	std::cout << "client> Sending to Port " << servaddr.sin_port << "\n" << std::endl;
 	
 	for(int i=0; i<ATTEMPTS; i++){
 		//The client sends a message to the server?
