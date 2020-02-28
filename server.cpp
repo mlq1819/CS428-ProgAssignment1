@@ -36,8 +36,6 @@ int main() {
 	// Bind the socket with the server address 
 	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
 	
-	std::cout << inet_ntoa(&servaddr.sin_addr.s_addr) << " at " << servaddr.sin_port << std::endl;
-	
 	// random generator
 	srand(time(0));
 
