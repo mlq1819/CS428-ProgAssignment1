@@ -62,7 +62,7 @@ int main(int argc, char ** argv) {
 			continue;
 		}
 		buffer[n] = '\0';
-		long rtt = (end.tv_usec-start.tv_usec)*1000;
+		long rtt = (end.tv_usec-start.tv_usec)/1000;
 		std::cout << rtt << " milliseconds" << std::endl;
 	}
 	return 0;
