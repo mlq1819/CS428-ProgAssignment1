@@ -7,7 +7,7 @@
 #include <unistd.h> 
 #include <string.h> 
 #include <time.h>
-#include <ctime>
+#include <sys/time.h>
 #include <sys/types.h> 
 #include <sys/socket.h> 
 #include <arpa/inet.h> 
@@ -40,7 +40,7 @@ int main(int argc, char ** argv) {
 	//inet_addr(argv[1]); // kek
 	servaddr.sin_port = htons(PORT); // port number
 	
-	clock_t start, end;
+	struct timeval start, end;
 	if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO,&timeout,sizeof(timeout)) < 0) {
 		perror("Error");
 	}
