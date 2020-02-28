@@ -47,10 +47,7 @@ int main(int argc, char ** argv) {
 	cliaddr.sin_port = htons(PORT); // port number
 	
 	// Bind the socket with the client address 
-	bind(sockfd, (const struct sockaddr *)&cliaddr, sizeof(cliaddr));
-	
-	// random generator
-	srand(time(0));
+	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
 	
 	clock_t start, end;
 	if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO,&timeout,sizeof(timeout)) < 0) {
