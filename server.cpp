@@ -37,7 +37,7 @@ int main() {
 	// Bind the socket with the server address 
 	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
 	
-	getsockname(sockfd, (struct sockaddr *) &tempaddr,1024);
+	getsockname(sockfd, (struct sockaddr *) &tempaddr, NULL);
 	std::cout << "Running on " << inet_ntoa(tempaddr.sin_addr) << " on Port " << tempaddr.sin_port << std::endl;
 	
 	// random generator
