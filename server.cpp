@@ -27,7 +27,6 @@ int main() {
 	
 	memset(&servaddr, 0, sizeof(servaddr)); 
 	memset(&cliaddr, 0, sizeof(cliaddr)); 
-	memset(&tempaddr, 0, sizeof(cliaddr)); 
 	
 	// Fill server information 
 	servaddr.sin_family = AF_INET; // IPv4 
