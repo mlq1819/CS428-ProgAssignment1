@@ -32,12 +32,6 @@ int main() {
 	// random generator
 	srand(time(0));
 	
-	/*struct timeval tv;
-	tv.tv_sec = 1;
-	tv.tv_usec = 0;
-	if (setsockopt(rcv_sock, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0) {
-		perror("Error");
-	}*/
 	time_t time_s, time_r;
 	
 	for(int i=0; i<ATTEMPTS; i++){
