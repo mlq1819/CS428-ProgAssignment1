@@ -50,19 +50,19 @@ int main(int argc, char ** argv) {
 	
 	for(int i=0; i<ATTEMPTS; i++){
 		//The client sends a message to the server?
-		start = clock();
+		gettimeofday(&start, NULL);
 		sendto(sockfd, (const char *)buffer, strlen(buffer), 
 			MSG_CONFIRM, (const struct sockaddr *) &servaddr, sizeof(servaddr));
 			
 		//Receive the server ping along with the address it is coming from
 		n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), 0, ( struct sockaddr *) &servaddr, &len);
-		end = clock();
+		gettimeofday(&end, NULL);
 		if(n<0){ //timeout
 			std::cout << "packet lost..." << std::endl;
 			continue;
 		}
 		buffer[n] = '\0';
-		long rtt = (end-start)*1000/CLOCKS_PER_SEC;
+		long rtt = (end.u_sec-start.u_sec)*1000;
 		std::cout << rtt << " milliseconds" << std::endl;
 	}
 	return 0;
