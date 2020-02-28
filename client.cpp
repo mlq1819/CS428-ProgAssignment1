@@ -51,6 +51,9 @@ int main(int argc, char ** argv) {
 		perror("Error");
 	}
 	
+	
+	std::cout << "Sending to Port " << servaddr.sin_port << std::endl;
+	
 	for(int i=0; i<ATTEMPTS; i++){
 		//The client sends a message to the server?
 		start = clock();
