@@ -56,8 +56,8 @@ int main(int argc, char ** argv) {
 			
 		//Receive the server ping along with the address it is coming from
 		n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), 0, ( struct sockaddr *) &servaddr, &len);
-		if(n<0){ //timeout
 		end = clock();
+		if(n<0){ //timeout
 			std::cout << "packet lost..." << std::endl;
 			continue;
 		}
