@@ -25,7 +25,7 @@ int main(int argc, char ** argv) {
 	int sockfd, n;
 	socklen_t len;
 	char buffer[1024];
-	struct sockaddr_in servaddr, cliaddr; 
+	struct sockaddr_in servaddr; 
 	struct timeval timeout;
 	timeout.tv_sec = 1;
 	timeout.tv_usec = 0;
@@ -33,18 +33,12 @@ int main(int argc, char ** argv) {
 	sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 	
 	memset(&servaddr, 0, sizeof(servaddr)); 
-	memset(&cliaddr, 0, sizeof(cliaddr)); 
 	
 	//Fill server information
 	servaddr.sin_family = AF_INET; // IPv4 
 	servaddr.sin_addr.s_addr = INADDR_ANY;
 	//inet_addr(argv[1]); // kek
 	servaddr.sin_port = htons(PORT); // port number
-	
-	// Fill client information 
-	cliaddr.sin_family = AF_INET; // IPv4 
-	cliaddr.sin_addr.s_addr = INADDR_ANY; // localhost
-	cliaddr.sin_port = htons(PORT); // port number
 	
 	clock_t start, end;
 	if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO,&timeout,sizeof(timeout)) < 0) {
