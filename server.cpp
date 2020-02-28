@@ -19,7 +19,7 @@ int main() {
 	int sockfd, n;
 	socklen_t len;
 	char buffer[1024];
-	struct sockaddr_in servaddr, cliaddr; 
+	struct sockaddr_in servaddr, cliaddr, tempaddr; 
 	
 	// Create a UDP socket
 	// Notice the use of SOCK_DGRAM for UDP packets
@@ -27,6 +27,7 @@ int main() {
 	
 	memset(&servaddr, 0, sizeof(servaddr)); 
 	memset(&cliaddr, 0, sizeof(cliaddr)); 
+	memset(&tempaddr, 0, sizeof(cliaddr)); 
 	
 	// Fill server information 
 	servaddr.sin_family = AF_INET; // IPv4 
@@ -35,6 +36,9 @@ int main() {
 	
 	// Bind the socket with the server address 
 	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
+	
+	getsockname(sockfd, tempaddr, sizeof(tempaddr));
+	std::cout << std::cout << "Running on " << inet_ntoa(tempaddr.sin_addr.s_addr) << " on Port " << tempaddr.sin_port << std::endl;
 	
 	// random generator
 	srand(time(0));
