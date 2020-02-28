@@ -38,7 +38,7 @@ int main() {
 	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
 	
 	getsockname(sockfd, tempaddr, sizeof(tempaddr));
-	std::cout << std::cout << "Running on " << inet_ntoa(tempaddr.sin_addr.s_addr) << " on Port " << tempaddr.sin_port << std::endl;
+	std::cout << std::cout << "Running on " << inet_ntoa(tempaddr.sin_addr) << " on Port " << tempaddr.sin_port << std::endl;
 	
 	// random generator
 	srand(time(0));
