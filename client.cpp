@@ -37,7 +37,8 @@ int main(int argc, char ** argv) {
 	
 	//Fill server information
 	servaddr.sin_family = AF_INET; // IPv4 
-	servaddr.sin_addr.s_addr = inet_addr(argv[1]); // kek
+	servaddr.sin_addr.s_addr = INADDR_ANY;
+	//inet_addr(argv[1]); // kek
 	servaddr.sin_port = htons(PORT); // port number
 	
 	// Fill client information 
