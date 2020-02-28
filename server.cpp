@@ -36,7 +36,7 @@ int main() {
 	// Bind the socket with the server address 
 	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
 	
-	std::cout << "server> Running on Port " << servaddr.sin_port << "\n" << std::endl;
+	std::cout << "\nserver> Running on Port " << servaddr.sin_port << "\n" << std::endl;
 	
 	// random generator
 	srand(time(0));
