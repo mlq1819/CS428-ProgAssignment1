@@ -52,7 +52,7 @@ int main(int argc, char ** argv) {
 	srand(time(0));
 	
 	clock_t start, end;
-	if (setsockopt(rcv_sock, SOL_SOCKET, SO_RCVTIMEO,&timeout,sizeof(timeout)) < 0) {
+	if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO,&timeout,sizeof(timeout)) < 0) {
 		perror("Error");
 	}
 	
@@ -66,11 +66,11 @@ int main(int argc, char ** argv) {
 		n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), 0, ( struct sockaddr *) &servaddr, &len);
 		if(n<0){ //timeout
 		end = clock();
-			std::cout << "packet lost..." << cout << endl;
+			std::cout << "packet lost..." << std::endl;
 			continue;
 		}
 		buffer[n] = '\0';
-		long rtt = (end-start)*1000/CLOCKS_PER_SEC.
+		long rtt = (end-start)*1000/CLOCKS_PER_SEC;
 		std::cout << rtt << " milliseconds" << std::endl;
 	}
 	return 0;
