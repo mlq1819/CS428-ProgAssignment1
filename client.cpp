@@ -16,12 +16,7 @@
 #define PORT	 12000
 #define ATTEMPTS 10
 
-int main(int argc, char ** argv) { 
-	/*if(argc!=2){
-		std::cout << "Usage: " << argv[0] << " xxx.xx.xx.xxx" << std::endl;
-		return 1;
-	}*/
-	
+int main() { 
 	int sockfd, n;
 	socklen_t len;
 	char buffer[1024];
@@ -36,10 +31,9 @@ int main(int argc, char ** argv) {
 	
 	//Fill server information
 	servaddr.sin_family = AF_INET; // IPv4 
-	servaddr.sin_addr.s_addr = INADDR_ANY;
-	//inet_addr(argv[1]); // kek
+	servaddr.sin_addr.s_addr = INADDR_ANY; // localhost
 	servaddr.sin_port = htons(PORT); // port number
-	
+		
 	struct timeval start, end;
 	if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO,&timeout,sizeof(timeout)) < 0) {
 		perror("Error");
@@ -49,20 +43,18 @@ int main(int argc, char ** argv) {
 	std::cout << "\nclient> Sending to Port " << servaddr.sin_port << "\n" << std::endl;
 	
 	for(int i=0; i<ATTEMPTS; i++){
-		//The client sends a message to the server?
-		gettimeofday(&start, NULL);
-		sendto(sockfd, (const char *)buffer, strlen(buffer), 
-			MSG_CONFIRM, (const struct sockaddr *) &servaddr, sizeof(servaddr));
+		
+		gettimeofday(&start, NULL); //start timer to get RTT
+		sendto(sockfd, (const char *)buffer, strlen(buffer), MSG_CONFIRM, (const struct sockaddr *) &servaddr, sizeof(servaddr));//The client sends a message to the server
 			
-		//Receive the server ping along with the address it is coming from
-		n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), 0, ( struct sockaddr *) &servaddr, &len);
-		gettimeofday(&end, NULL);
-		if(n<0){ //timeout
+		n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), 0, ( struct sockaddr *) &servaddr, &len); //Receive the server ping
+		gettimeofday(&end, NULL); //stop timer to get RTT
+		if(n<0){ //n returns -1 if it times out; this checks if it times out
 			std::cout << "packet lost..." << std::endl;
 			continue;
 		}
 		buffer[n] = '\0';
-		long rtt = (end.tv_usec-start.tv_usec);
+		long rtt = (end.tv_usec-start.tv_usec); //calculate the RTT from the start and end of the timer
 		std::cout << rtt << " milliseconds" << std::endl;
 	}
 	return 0;
