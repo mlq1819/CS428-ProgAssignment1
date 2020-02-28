@@ -19,7 +19,7 @@ int main() {
 	int sockfd, n;
 	socklen_t len;
 	char buffer[1024];
-	struct sockaddr_in servaddr, cliaddr, tempaddr; 
+	struct sockaddr_in servaddr, cliaddr; 
 	
 	// Create a UDP socket
 	// Notice the use of SOCK_DGRAM for UDP packets
@@ -37,8 +37,7 @@ int main() {
 	// Bind the socket with the server address 
 	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
 	
-	getsockname(sockfd, (struct sockaddr *) &tempaddr, NULL);
-	std::cout << "Running on " << inet_ntoa(tempaddr.sin_addr) << " on Port " << tempaddr.sin_port << std::endl;
+	std::cout << "Running on Port " << servaddr.sin_port << std::endl;
 	
 	// random generator
 	srand(time(0));
