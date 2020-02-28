@@ -46,9 +46,6 @@ int main(int argc, char ** argv) {
 	cliaddr.sin_addr.s_addr = INADDR_ANY; // localhost
 	cliaddr.sin_port = htons(PORT); // port number
 	
-	// Bind the socket with the client address 
-	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
-	
 	clock_t start, end;
 	if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO,&timeout,sizeof(timeout)) < 0) {
 		perror("Error");
